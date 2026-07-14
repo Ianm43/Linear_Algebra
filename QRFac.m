@@ -1,27 +1,54 @@
 function [Q,R] = QRFac( M )
-    R = eye( size(M) );
-    Q = zeros( size(M) );
 
-   %Initialize the recursive sequence
-    R(1,1) = norm( M(:,1) );
-    Q(:,1) = M(:,1) ./ R(1,1);
+% This algorithms bears a striking resemblance to gaussian elimination,
+% but you don't need to use matrix multiplications to keep track of the
+% column operations.
+
+    Q = M;
+    R = eye( size(M) );
     
 
-    for j = (2:size(M,1))
+    for j = (1:size(M,2))
 
-        R(j,j) = norm( M(:,j) )^2;
-        Q(:,j) = M(:,j);
+        R(j,j) = norm( Q(:,j) );
+        Q(:,j) = Q(:,j) ./ R(j,j);
 
-        for i = (1:j-1)
-            R(i,j) = M(:,j)' * Q(:,i);
-            R(j,j) = R(j,j) - R(i,j)^2;
-            Q(:,j) = Q(:,j) - R(i,j) .* Q(:,i); 
+        for i = (j+1:size(M,1))
+
+            R(j,i) = Q(:,j)' * Q(:,i);
+            Q(:,i) = Q(:,i) - R(j,i) * Q(:,j);
+
         end
-        R(j,j) = sqrt( R(j,j) );
-        Q(:,j) = Q(:,j) ./ R(j,j); 
+
     end
 
 end
+
+
+% function [Q,R] = QRFac( M )
+%     R = eye( size(M) );
+%     Q = zeros( size(M) );
+% 
+%    %Initialize the recursive sequence
+%     R(1,1) = norm( M(:,1) );
+%     Q(:,1) = M(:,1) ./ R(1,1);
+% 
+% 
+%     for j = (2:size(M,1))
+% 
+%         R(j,j) = norm( M(:,j) )^2;
+%         Q(:,j) = M(:,j);
+% 
+%         for i = (1:j-1)
+%             R(i,j) = M(:,j)' * Q(:,i);
+%             R(j,j) = R(j,j) - R(i,j)^2;
+%             Q(:,j) = Q(:,j) - R(i,j) .* Q(:,i); 
+%         end
+%         R(j,j) = sqrt( R(j,j) );
+%         Q(:,j) = Q(:,j) ./ R(j,j); 
+%     end
+% 
+% end
 
 
 
