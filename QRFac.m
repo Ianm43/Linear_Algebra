@@ -25,6 +25,7 @@ function [Q,R] = QRFac( M )
 end
 
 
+
 % function [Q,R] = QRFac( M )
 %     R = eye( size(M) );
 %     Q = zeros( size(M) );
