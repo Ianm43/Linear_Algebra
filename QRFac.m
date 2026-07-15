@@ -6,7 +6,7 @@ function [Q,R] = QRFac( M )
 
     Q = M;
     R = eye( size(M) );
-    
+
 
     for j = (1:size(M,2))
 

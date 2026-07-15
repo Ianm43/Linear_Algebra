@@ -12,5 +12,5 @@ function [A,B] = Eig( M )
         M = R * Q;
 
     end
-    B = diag(M);
+    B = M;
 end
