@@ -13,4 +13,5 @@ function [A,B] = Eig( M )
 
     end
     B = diag(M);
+    
 end
