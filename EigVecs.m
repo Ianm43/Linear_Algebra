@@ -2,11 +2,10 @@ function V = EigVecs( A )
 
     V = rand(size(A,1),1);
 
-
     V = Eig( V, A );
 
-
 end
+
 
 function [V] = Eig( V, A )
 
