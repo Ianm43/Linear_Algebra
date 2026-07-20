@@ -1,11 +1,11 @@
-function [A,B] = Eig( M )
+function B = EigVals( M )
 
     [Q,R] = QRFac(M);
     M = R*Q;
     A = Q;
 
 
-    for i = (1:20)
+    for i = (1:30)
 
         [Q,R] = QRFac(M);
         A = A * Q;
