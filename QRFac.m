@@ -11,7 +11,14 @@ function [Q,R] = QRFac( M )
     for j = (1:size(M,2))
 
         R(j,j) = norm( Q(:,j) );
+    
+        if R(j,j) == 0
+            continue
+        end
+        
+        
         Q(:,j) = Q(:,j) ./ R(j,j);
+        
 
         for i = (j+1:size(M,1))
 

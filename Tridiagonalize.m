@@ -5,21 +5,22 @@ function A = Tridiagonalize( A )
     end
 
 
-    for i = (1:size(A,1)-1)
+        for i = (1:size(A,1)-1)
 
-        x = A(:,i);
-        x(1:i) = 0;
+            x = A(:,i);
+            x(1:i) = 0;
 
-        y = zeros( size(x) );
+            y = zeros( size(x) );
 
-        y(i+1) = -A(i+1,i) / abs(A(i+1,i) ) * norm(x);
+            y(i+1) = -A(i+1,i) / abs(A(i+1,i) ) * norm(x);
 
-        u = (x - y) ./ norm( x-y );
+            u = (x - y) ./ norm( x-y );
 
-        H = Householder(u);
+            H = Householder(u);
 
-        A = H * A * H;
+            A = H * A * H;
 
-    end
+        end
+
 
 end

@@ -1,17 +1,26 @@
-function B = EigVals( M )
+function [B] = EigVals( M, tolerance )
 
+    arguments
+        M {mustBeMatrix};
+        tolerance (1,1) double = 1e-7;
+    end
+
+    %Tri-diagonalization process preserves eigenvalues, and speeds up QR
+    %algorithm
+    M = Tridiagonalize(M);
+
+    temp = M;
     [Q,R] = QRFac(M);
     M = R*Q;
-    A = Q;
 
+    while norm( abs(temp) - abs(M) ) > tolerance
 
-    for i = (1:30)
+        temp = M;
 
         [Q,R] = QRFac(M);
-        A = A * Q;
         M = R * Q;
 
     end
-    B = diag(M);
+    B = diag( diag(M) );
 
 end
